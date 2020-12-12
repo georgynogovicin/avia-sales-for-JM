@@ -1,17 +1,17 @@
 import React from 'react';
 
-import './card.scss';
+import classes from './card.module.scss';
 
 const Card = () => {
   return (
-    <li className="card">
-      <div className="card__header">
-        <span className="card__price">13400р</span>
-        <span className="card__IATA">
+    <li className={classes.card}>
+      <div className={classes.card__header}>
+        <span className={classes.card__price}>13400р</span>
+        <span className={classes.card__IATA}>
           <img width="110" heigth="36" src="https://pics.avs.io/99/36/SU.png" alt="AER" />
         </span>
       </div>
-      <table className="card__info">
+      <table className={classes.card__info}>
         <tbody>
           <tr>
             <th>MOW – HKT</th>

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import './tabs.scss';
+import classes from './tabs.module.scss';
 
 const Tabs = () => {
   return (
-    <nav className="tabs">
-      <div className="tabs__item">Самый дешевый</div>
-      <div className="tabs__item">Самый быстрый</div>
+    <nav className={classes.tabs}>
+      <div className={classes.tabs__item}>Самый дешевый</div>
+      <div className={classes.tabs__item}>Самый быстрый</div>
     </nav>
   );
 };

@@ -3,14 +3,14 @@ import TransferFilter from '../transfer-filter';
 import Tabs from '../tabs';
 import CardsList from '../cards-list';
 
-import './App.scss';
+import classes from './App.module.scss';
 
 function App() {
   return (
-    <div className="App">
-      <div className="logo" />
+    <div className={classes.App}>
+      <div className={classes.logo} />
       <TransferFilter />
-      <div className="App__inner">
+      <div className={classes.App__inner}>
         <Tabs />
         <CardsList />
       </div>
