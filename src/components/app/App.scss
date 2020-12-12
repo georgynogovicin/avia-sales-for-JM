@@ -1,0 +1,56 @@
+
+
+.App {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px;
+  // display: flex;
+  // justify-content: space-between;
+
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: 
+    "header header"
+    "aside content"
+  ;
+  // justify-content: center;
+  // align-items: center;
+
+  @media (max-width: 424px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "header"
+      "aside"
+      "content"
+    ;
+    grid-gap: 10px;
+  }
+
+  &__inner {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @media (max-width: 767px) {
+      // width: 232px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  grid-area: header;
+
+  margin: 50px auto;
+  background-position: center;
+  background-image: url("../../img/Logo.svg");
+
+  @media (max-width: 764px) {
+    margin: 5px auto;
+  }
+}
+
