@@ -32,11 +32,6 @@
       color: #ffffff;
     }
 
-    &:active {
-      background-color: #2196f3;
-      color: #ffffff;
-    }
-
     &:first-child {
       border-right: 1px solid #dfe5ec;
       border-radius: 5px 0 0 5px;
@@ -44,6 +39,11 @@
 
     &:last-child {
       border-radius: 0 5px 5px 0;
+    }
+
+    &--active {
+      background-color: #2196f3;
+      color: #ffffff;
     }
   }
 }
