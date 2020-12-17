@@ -32,7 +32,7 @@ const Tabs = ({ sort, setCheap, setFast }) => {
 
 const mapStateToProps = (state) => {
   return {
-    sort: state.sort,
+    sort: state.priceFilter.sort,
   };
 };
 
