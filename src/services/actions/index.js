@@ -39,3 +39,17 @@ export const setFilterThreeTransfers = () => {
     type: 'TRANSFER-FILTER-THREE-TRANSFERS',
   };
 };
+
+export const setSearchId = (payload) => {
+  return {
+    type: 'GET-SEARCH-ID',
+    payload,
+  };
+};
+
+export const setTickets = (payload) => {
+  return {
+    type: 'SET-TICKETS',
+    payload,
+  };
+};
