@@ -1,31 +1,19 @@
-const initialState = {
-  tickets: [],
-};
+const initialState = [];
 
 const tickets = (state = initialState, action) => {
   switch (action.type) {
     case 'SET-TICKETS':
-      return {
-        tickets: action.payload,
-      };
+      return action.payload;
 
     case 'SORT-BY-PRICE': {
-      const sorted = state.tickets.slice().sort((a, b) => a.price - b.price);
-      return {
-        tickets: sorted,
-      };
+      const sorted = state.slice().sort((first, second) => first.price - second.price);
+      return sorted;
     }
 
     case 'SORT-BY-DURATION': {
-      const sorted = state.tickets.slice().sort((a, b) => a.segments[0].duration - b.segments[0].duration);
-      return {
-        tickets: sorted,
-      };
+      const sorted = state.slice().sort((first, second) => first.segments[0].duration - second.segments[0].duration);
+      return sorted;
     }
-
-    // case 'SORT-BY-ONE-TRANSFER': {
-    //   const sorted
-    // }
 
     default:
       return state;

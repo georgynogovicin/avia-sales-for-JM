@@ -21,7 +21,7 @@ const CardsList = ({ tickets, filters }) => {
     return false;
   };
 
-  const filteredTickets = tickets.tickets.filter((item) => ticketsFilter(filters, item));
+  const filteredTickets = tickets.filter((item) => ticketsFilter(filters, item));
 
   const cards = filteredTickets.slice(0, 10).map((ticket) => {
     const { id, ...props } = ticket;

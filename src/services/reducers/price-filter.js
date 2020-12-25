@@ -1,14 +1,12 @@
-const initialState = {
-  sort: 'cheap',
-};
+const initialState = '';
 
 const priceFilter = (state = initialState, action) => {
   switch (action.type) {
     case 'CHEAP':
-      return { sort: 'cheap' };
+      return 'cheap';
 
     case 'FAST':
-      return { sort: 'fast' };
+      return 'fast';
 
     default:
       return state;

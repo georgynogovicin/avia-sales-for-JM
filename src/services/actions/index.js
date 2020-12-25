@@ -1,3 +1,8 @@
+import addId from '../helpers/addId';
+import request from '../api/request';
+
+const addIdFn = addId();
+
 export const setCheap = () => {
   return {
     type: 'CHEAP',
@@ -51,6 +56,29 @@ export const setTickets = (payload) => {
   return {
     type: 'SET-TICKETS',
     payload,
+  };
+};
+
+export const getTickets = (searchId) => {
+  return (dispatch) => {
+    request
+      .getTickets(searchId)
+      .then((res) => {
+        const ticketWithId = addIdFn(res);
+        dispatch(setTickets(ticketWithId));
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const getSearchId = () => {
+  return (dispatch) => {
+    request
+      .getSearchId()
+      .then((searchId) => {
+        dispatch(setSearchId(searchId));
+      })
+      .catch((error) => console.log(error));
   };
 };
 

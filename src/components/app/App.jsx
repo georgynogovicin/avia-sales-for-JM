@@ -1,40 +1,26 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import TransferFilter from '../transfer-filter';
 import Tabs from '../tabs';
 import CardsList from '../cards-list';
-import request from '../../services/api/request';
-import { setSearchId, setTickets } from '../../services/actions';
-import addId from '../../services/helpers/addId';
+// import request from '../../services/api/request';
+import { getSearchId, getTickets } from '../../services/actions';
+// import addId from '../../services/helpers/addId';
 
 import classes from './App.module.scss';
 
-function App() {
+function App({ searchId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const addIdFn = addId();
-
-    const getData = async () => {
-      try {
-        const searchId = await request.getSearchId();
-        dispatch(setSearchId(searchId));
-
-        if (searchId !== '') {
-          try {
-            const tickets = await request.getTickets(searchId);
-            const ticketWithId = addIdFn(tickets);
-            dispatch(setTickets(ticketWithId));
-          } catch (error) {
-            console.log(error);
-          }
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getData();
-  }, [dispatch]);
+    if (!searchId) {
+      dispatch(getSearchId());
+    }
+    if (searchId) {
+      dispatch(getTickets(searchId));
+    }
+  }, [searchId, dispatch]);
 
   return (
     <div className={classes.App}>
@@ -48,4 +34,14 @@ function App() {
   );
 }
 
-export default App;
+App.propTypes = {
+  searchId: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    searchId: state.searchId,
+  };
+};
+
+export default connect(mapStateToProps)(App);

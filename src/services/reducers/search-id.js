@@ -1,13 +1,9 @@
-const initialState = {
-  searchid: '',
-};
+const initialState = '';
 
-const searchId = (state = initialState, action) => {
-  switch (action.type) {
+const searchId = (state = initialState, { type, payload }) => {
+  switch (type) {
     case 'GET-SEARCH-ID':
-      return {
-        searchId: action.payload,
-      };
+      return payload;
 
     default:
       return state;
