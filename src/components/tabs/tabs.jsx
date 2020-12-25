@@ -7,7 +7,7 @@ import * as actions from '../../services/actions';
 
 import classes from './tabs.module.scss';
 
-const Tabs = ({ sort, setCheap, setFast }) => {
+const Tabs = ({ sort, setCheap, setFast, sortByDuration, sortByPrice }) => {
   const cheapClass = ClassNames({
     [classes.tabs__item]: true,
     [classes['tabs__item--active']]: sort === 'cheap',
@@ -18,12 +18,22 @@ const Tabs = ({ sort, setCheap, setFast }) => {
     [classes['tabs__item--active']]: sort === 'fast',
   });
 
+  const onClickCheap = () => {
+    setCheap();
+    sortByPrice();
+  };
+
+  const onClickFast = () => {
+    setFast();
+    sortByDuration();
+  };
+
   return (
     <nav className={classes.tabs}>
-      <div className={cheapClass} onClick={setCheap} onKeyDown={() => {}} role="button" tabIndex={-1}>
+      <div className={cheapClass} onClick={onClickCheap} onKeyDown={() => {}} role="button" tabIndex={-1}>
         Самый дешевый
       </div>
-      <div className={fastClass} onClick={setFast} onKeyDown={() => {}} role="button" tabIndex={-2}>
+      <div className={fastClass} onClick={onClickFast} onKeyDown={() => {}} role="button" tabIndex={-2}>
         Самый быстрый
       </div>
     </nav>
@@ -37,17 +47,21 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  const { setFast, setCheap } = bindActionCreators(actions, dispatch);
+  const { setFast, setCheap, sortByPrice, sortByDuration } = bindActionCreators(actions, dispatch);
 
   return {
     setFast,
     setCheap,
+    sortByPrice,
+    sortByDuration,
   };
 };
 
 Tabs.propTypes = {
   setFast: PropTypes.func.isRequired,
   setCheap: PropTypes.func.isRequired,
+  sortByDuration: PropTypes.func.isRequired,
+  sortByPrice: PropTypes.func.isRequired,
   sort: PropTypes.string.isRequired,
 };
 

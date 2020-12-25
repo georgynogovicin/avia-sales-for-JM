@@ -1,17 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import duration from './format';
+import * as format from './format';
 
 import classes from './card.module.scss';
 
 const Card = ({ carrier, price, segments: [there, back] }) => {
-  const cardDate = (date) => {
-    const arr = date.split('T');
-    const day = arr[0];
-    const time = arr[1].split('.')[0];
-    return `${day} ${time}`;
-  };
-
   return (
     <li className={classes.card}>
       <div className={classes.card__header}>
@@ -27,24 +20,24 @@ const Card = ({ carrier, price, segments: [there, back] }) => {
               {there.origin} – {there.destination}
             </th>
             <th>В пути</th>
-            <th>{there.stops.length} пересадки</th>
+            <th>{format.declination(there.stops.length)}</th>
           </tr>
           <tr>
-            <td>{cardDate(there.date)}</td>
-            <td>{duration(there.duration)}</td>
-            <td>HKG, JNB</td>
+            <td>{format.timeOfDeparture(there.date, there.duration)}</td>
+            <td>{format.duration(there.duration)}</td>
+            <td>{there.stops.join(' ')}</td>
           </tr>
           <tr>
             <th>
               {back.origin} – {back.destination}
             </th>
             <th>В пути</th>
-            <th>{back.stops.length} пересадки</th>
+            <th>{format.declination(back.stops.length)}</th>
           </tr>
           <tr>
-            <td>10:45 – 08:00</td>
-            <td>{duration(back.duration)}</td>
-            <td>HKG, JNB</td>
+            <td>{format.timeOfDeparture(back.date, back.duration)}</td>
+            <td>{format.duration(back.duration)}</td>
+            <td>{back.stops.join(' ')}</td>
           </tr>
         </tbody>
       </table>

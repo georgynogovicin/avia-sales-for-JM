@@ -53,3 +53,15 @@ export const setTickets = (payload) => {
     payload,
   };
 };
+
+export const sortByPrice = () => {
+  return {
+    type: 'SORT-BY-PRICE',
+  };
+};
+
+export const sortByDuration = () => {
+  return {
+    type: 'SORT-BY-DURATION',
+  };
+};

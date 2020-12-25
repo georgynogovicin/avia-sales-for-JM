@@ -10,9 +10,8 @@ class Request {
 
       return body;
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
-    return false;
   }
 
   async getSearchId() {
@@ -31,24 +30,3 @@ class Request {
 const request = new Request();
 
 export default request;
-
-// async function request(url, options = {}) {
-//     let body;
-//     try {
-//         const res = await fetch(url, options);
-
-//         if(!res.ok) {
-//             throw new Error(`Could not fetch ${url}. Status: ${res.status}` )
-//         }
-
-//         body = await res.json();
-//     } catch(error) {
-//         console.log(error);
-//     }
-
-//     return body;
-// }
-
-// const id = request(`https://front-test.beta.aviasales.ru/search`);
-
-// export default request;

@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
-// import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
-// import PropTypes from 'prop-types';
 import TransferFilter from '../transfer-filter';
 import Tabs from '../tabs';
 import CardsList from '../cards-list';
 import request from '../../services/api/request';
 import { setSearchId, setTickets } from '../../services/actions';
 import addId from '../../services/helpers/addId';
-// import * as action from '../../services/actions';
 
 import classes from './App.module.scss';
 
@@ -37,7 +34,7 @@ function App() {
       }
     };
     getData();
-  });
+  }, [dispatch]);
 
   return (
     <div className={classes.App}>
@@ -50,10 +47,5 @@ function App() {
     </div>
   );
 }
-
-// App.propTypes = {
-//   state: PropTypes.string.isRequired,
-//   setSearchId: PropTypes.func.isRequired
-// }
 
 export default App;
