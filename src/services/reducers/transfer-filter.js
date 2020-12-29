@@ -1,9 +1,9 @@
 const initialState = {
-  all: true,
+  all: false,
   without: true,
-  oneTransfer: true,
-  twoTransfers: true,
-  threeTransfers: true,
+  oneTransfer: false,
+  twoTransfers: false,
+  threeTransfers: false,
 };
 
 const transferFilter = (state = initialState, action) => {

@@ -2,8 +2,13 @@ const initialState = [];
 
 const tickets = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET-TICKETS':
-      return action.payload;
+    case 'SET-TICKETS': {
+      const sorted = action.payload.slice().sort((first, second) => first.price - second.price);
+
+      return [...state, ...sorted];
+    }
+    // case 'SET-TICKETS':
+    //   return action.payload;
 
     case 'SORT-BY-PRICE': {
       const sorted = state.slice().sort((first, second) => first.price - second.price);

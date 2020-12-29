@@ -40,6 +40,7 @@
   width: 80px;
   height: 80px;
   grid-area: header;
+  position: relative;
 
   margin: 50px auto;
   background-position: center;
@@ -48,4 +49,9 @@
   @media (max-width: 764px) {
     margin: 5px auto;
   }
+}
+
+.spinner {
+  position: absolute;
+  top: -5px;
 }

@@ -8,11 +8,6 @@ import App from './components/app';
 
 import './index.scss';
 
-// const loggerMiddleware = (store) => (next) => (action) => {
-//   const result = next(action);
-//   console.log(store.getState());
-//   return result;
-// };
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({

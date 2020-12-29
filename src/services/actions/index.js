@@ -59,26 +59,10 @@ export const setTickets = (payload) => {
   };
 };
 
-export const getTickets = (searchId) => {
-  return (dispatch) => {
-    request
-      .getTickets(searchId)
-      .then((res) => {
-        const ticketWithId = addIdFn(res);
-        dispatch(setTickets(ticketWithId));
-      })
-      .catch((error) => console.log(error));
-  };
-};
-
-export const getSearchId = () => {
-  return (dispatch) => {
-    request
-      .getSearchId()
-      .then((searchId) => {
-        dispatch(setSearchId(searchId));
-      })
-      .catch((error) => console.log(error));
+export const setError = (payload) => {
+  return {
+    type: 'SET-ERROR',
+    payload,
   };
 };
 
@@ -92,4 +76,36 @@ export const sortByDuration = () => {
   return {
     type: 'SORT-BY-DURATION',
   };
+};
+
+export const setLoadingStatus = (payload) => {
+  return {
+    type: 'LOADING-IS-FINISH',
+    payload,
+  };
+};
+
+export const getTickets = (searchId) => async (dispatch) => {
+  try {
+    const res = await request.getTickets(searchId);
+    const { tickets, stop } = res;
+
+    if (stop) {
+      dispatch(setLoadingStatus());
+    }
+
+    const ticketWithId = addIdFn(tickets);
+    dispatch(setTickets(ticketWithId));
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
+
+export const getSearchId = () => async (dispatch) => {
+  try {
+    const res = await request.getSearchId();
+    dispatch(setSearchId(res));
+  } catch (error) {
+    dispatch(setError(error));
+  }
 };

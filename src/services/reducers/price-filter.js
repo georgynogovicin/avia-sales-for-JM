@@ -1,4 +1,4 @@
-const initialState = '';
+const initialState = 'cheap';
 
 const priceFilter = (state = initialState, action) => {
   switch (action.type) {

@@ -1,29 +1,33 @@
 class Request {
-  async getResource(url, options = {}) {
+  static apiURL = `https://front-test.beta.aviasales.ru/`;
+
+  async getResource(url, requestCounter = 0) {
+    let body;
+
     try {
-      const res = await fetch(url, options);
-
-      if (!res.ok) {
-        throw new Error(`Could not fetch ${url}. Status: ${res.status}`);
+      const res = await fetch(url);
+      if (res.status === 500) {
+        throw new Error('Ошибка');
       }
-      const body = res.json();
-
-      return body;
+      body = await res.json();
     } catch (error) {
+      if (requestCounter < 3) return this.getResource(url, requestCounter + 1);
       throw new Error(error);
     }
+
+    return body;
   }
 
   async getSearchId() {
-    const res = await this.getResource(`https://front-test.beta.aviasales.ru/search`);
+    const res = await this.getResource(`${Request.apiURL}search`);
 
     return res.searchId;
   }
 
   async getTickets(searchId) {
-    const res = await this.getResource(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`);
+    const res = await this.getResource(`${Request.apiURL}tickets?searchId=${searchId}`);
 
-    return res.tickets;
+    return res;
   }
 }
 
