@@ -1,4 +1,5 @@
-import React from 'react';
+/*eslint-disable */
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Card from '../card';
@@ -6,6 +7,8 @@ import Card from '../card';
 import classes from './cards-list.module.scss';
 
 const CardsList = ({ tickets, filters, error }) => {
+  const [cardsToShow, setCardsToShow] = useState(5);
+
   const ticketsFilter = ({ all, without, oneTransfer, twoTransfers, threeTransfers }, item) => {
     if (
       (item.segments[0].stops.length === 0 && without) ||
@@ -21,7 +24,7 @@ const CardsList = ({ tickets, filters, error }) => {
   };
 
   const filteredTickets = tickets.filter((item) => ticketsFilter(filters, item));
-  const cards = filteredTickets.slice(0, 10).map((ticket) => {
+  const cards = filteredTickets.map((ticket) => {
     const { id, ...props } = ticket;
     return <Card key={id} {...props} />;
   });
@@ -31,18 +34,16 @@ const CardsList = ({ tickets, filters, error }) => {
   ) : null;
   const errorView = error.length ? <div className={classes.error}>Ошибка</div> : null;
 
-  const showMore = () => {
-    console.log('show more tickets');
-  };
-
   return (
     <ul className={classes['cards-list']}>
-      {cards}
+      {cards.slice(0, cardsToShow)}
       {errorView}
       {notFound}
-      <button type="button" onClick={showMore}>
-        Показать еще
-      </button>
+      {cards.length > 0 ? (
+        <button type="button" className={classes['show-more']} onClick={() => setCardsToShow(cardsToShow + 5)}>
+          Показать еще
+        </button>
+      ) : null}
     </ul>
   );
 };
