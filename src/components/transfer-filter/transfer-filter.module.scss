@@ -13,8 +13,8 @@
 
   border-radius: 5px;
 
-  @media (max-width: 424px) {
-    max-width: 450px;
+  @media (max-width: 700px) {
+    max-width: 680px;
   }
 
   &__header {
@@ -36,6 +36,7 @@
   line-height: 20px;
   height: 40px;
   width: 100%;
+  cursor: pointer;
 
   &:hover {
     background-color: #f1fcff;

@@ -14,7 +14,7 @@ function App({ searchId, loadingStatus, tickets }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (searchId === '') {
+    if (searchId === null) {
       dispatch(getSearchId());
     }
     if (!loadingStatus && searchId !== '') {

@@ -1,13 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import ClassNames from 'classnames';
-import * as actions from '../../services/actions';
+import { setCheap, setFast, sortByPrice, sortByDuration } from '../../services/actions';
 
 import classes from './tabs.module.scss';
 
-const Tabs = ({ sort, setCheap, setFast, sortByDuration, sortByPrice }) => {
+const Tabs = () => {
+  const dispatch = useDispatch();
+  const sort = useSelector((state) => state.priceFilter);
+
   const cheapClass = ClassNames({
     [classes.tabs__item]: true,
     [classes['tabs__item--active']]: sort === 'cheap',
@@ -19,13 +20,13 @@ const Tabs = ({ sort, setCheap, setFast, sortByDuration, sortByPrice }) => {
   });
 
   const onClickCheap = () => {
-    setCheap();
-    sortByPrice();
+    dispatch(setCheap());
+    dispatch(sortByPrice());
   };
 
   const onClickFast = () => {
-    setFast();
-    sortByDuration();
+    dispatch(setFast());
+    dispatch(sortByDuration());
   };
 
   return (
@@ -40,29 +41,4 @@ const Tabs = ({ sort, setCheap, setFast, sortByDuration, sortByPrice }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    sort: state.priceFilter,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  const { setFast, setCheap, sortByPrice, sortByDuration } = bindActionCreators(actions, dispatch);
-
-  return {
-    setFast,
-    setCheap,
-    sortByPrice,
-    sortByDuration,
-  };
-};
-
-Tabs.propTypes = {
-  setFast: PropTypes.func.isRequired,
-  setCheap: PropTypes.func.isRequired,
-  sortByDuration: PropTypes.func.isRequired,
-  sortByPrice: PropTypes.func.isRequired,
-  sort: PropTypes.string.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
+export default Tabs;

@@ -1,11 +1,13 @@
-const initialState = 'cheap';
+import { CHEAP, FAST } from '../actions';
+
+const initialState = null;
 
 const priceFilter = (state = initialState, action) => {
   switch (action.type) {
-    case 'CHEAP':
+    case CHEAP:
       return 'cheap';
 
-    case 'FAST':
+    case FAST:
       return 'fast';
 
     default:

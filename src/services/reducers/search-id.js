@@ -1,8 +1,10 @@
-const initialState = '';
+import { GET_SEARCH_ID } from '../actions';
+
+const initialState = null;
 
 const searchId = (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'GET-SEARCH-ID':
+    case GET_SEARCH_ID:
       return payload;
 
     default:

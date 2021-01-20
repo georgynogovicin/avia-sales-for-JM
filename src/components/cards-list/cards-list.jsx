@@ -1,31 +1,22 @@
-/*eslint-disable */
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import Card from '../card';
+import ticketsFilter from '../../services/helpers/ticketsFilter';
 
 import classes from './cards-list.module.scss';
 
-const CardsList = ({ tickets, filters, error }) => {
+const CardsList = () => {
   const [cardsToShow, setCardsToShow] = useState(5);
 
-  const ticketsFilter = ({ all, without, oneTransfer, twoTransfers, threeTransfers }, item) => {
-    if (
-      (item.segments[0].stops.length === 0 && without) ||
-      (item.segments[0].stops.length === 1 && oneTransfer) ||
-      (item.segments[0].stops.length === 2 && twoTransfers) ||
-      (item.segments[0].stops.length === 3 && threeTransfers) ||
-      all
-    ) {
-      return true;
-    }
-
-    return false;
-  };
+  const tickets = useSelector((state) => state.tickets);
+  const filters = useSelector((state) => state.transferFilter);
+  const error = useSelector((state) => state.errorView);
 
   const filteredTickets = tickets.filter((item) => ticketsFilter(filters, item));
+
   const cards = filteredTickets.map((ticket) => {
     const { id, ...props } = ticket;
+
     return <Card key={id} {...props} />;
   });
 
@@ -47,18 +38,5 @@ const CardsList = ({ tickets, filters, error }) => {
     </ul>
   );
 };
-const mapDispatchToProps = (state) => {
-  return {
-    tickets: state.tickets,
-    filters: state.transferFilter,
-    error: state.errorView,
-  };
-};
 
-CardsList.propTypes = {
-  tickets: PropTypes.instanceOf(Object).isRequired,
-  filters: PropTypes.instanceOf(Object).isRequired,
-  error: PropTypes.instanceOf(Object).isRequired,
-};
-
-export default connect(mapDispatchToProps)(CardsList);
+export default CardsList;
